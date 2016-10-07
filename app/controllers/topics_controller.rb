@@ -98,8 +98,12 @@ class TopicsController < ApplicationController
   #   		@topics = Topic.order("#{order_by}").page(params[:page]).per(5)
 		# 	end
 		# end
-		@topics = Topic.all.page(params[:page]).per(5)
 
+		if params[:category]
+			@topics = Category.find_by_name(params[:category]).topics.page(params[:page]).per(5)
+		else
+			@topics = Topic.all.page(params[:page]).per(5)
+		end
 	end
 
 	def topic
