@@ -37,7 +37,7 @@
 <hr style="height:2px;border:none;color:#333;background-color:#333;" />
 <table class="table table-hover">
 	<tr>
-		<th><%= link_to "Title", topics_path %></th>
+		<th>Title</th>
 		<th>Content</th>
 		<th>Owner</th>
 		<th>Created_at</th>
@@ -46,13 +46,15 @@
 	<% @topics.each do |t| %>
 		
 		<tr>
-			<td><%= truncate(t.title, :length => 40) %></td>
+			<td><%= link_to "#{truncate(t.title, :length => 40)}", topic_path(t) %></td>
 			<td><%= truncate(t.content, :length => 10) %></td>
 			<td><%= t.user.email %></td>
 			<td><%= t.created_at %></td>
 			<td>
+			<% if current_user == t.user %>
 				<%= link_to "", topics_path( :id =>  t, :page => params[:page]), :class => "btn btn-primary glyphicon glyphicon-pencil" %>
 				<%= link_to "", topic_path(t, :page => params[:page]), :method => :delete, :class => "btn btn-danger glyphicon glyphicon-trash" %>
+			<% end %>
 			</td>
 		</tr>
 	
