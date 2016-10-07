@@ -2,7 +2,7 @@ class TopicsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :topics, :only => [:index, :create, :update]
 	before_action :topic, :only => [:show, :update, :destroy]
-	# before_action :categories, :only => [:index, :create, :update]
+	before_action :categories, :only => [:index, :create, :update]
 	
 	def index
 		if params[:id]
@@ -69,7 +69,7 @@ class TopicsController < ApplicationController
 	private
 
 	def topic_params
-		params.require(:topic).permit(:title, :content, :category_ids => [])
+		params.require(:topic).permit(:title, :content, :category_id)
 	end
 
 	def topics
@@ -106,7 +106,7 @@ class TopicsController < ApplicationController
 		Topic.all.count
 	end
 
-	# def categories
-	# 	@categories = Category.all
-	# end
+	def categories
+		@categories = Category.all
+	end
 end
