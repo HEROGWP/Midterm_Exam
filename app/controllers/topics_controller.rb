@@ -15,20 +15,20 @@ class TopicsController < ApplicationController
 
 	end
 	def show
-	# 	if params[:id] && params[:comment_id]
-	# 		@comment = Comment.find(params[:comment_id])
-	# 		@url = topic_comment_path(@topic, @comment)
-	# 		@action = "patch"
-	# 		@submit_name = "Update"
-	# 	else
-	# 		@comment = @topic.comments.build
-	# 		@url = topic_comments_path(@topic)
-	# 		@action = "post"
-	# 		@submit_name = "Create"
-	# 	end
+		if params[:id] && params[:comment_id]
+			@comment = Comment.find(params[:comment_id])
+			@url = topic_comment_path(@topic, @comment)
+			@action = "patch"
+			@submit_name = "Update"
+		else
+			@comment = @topic.comments.build
+			@url = topic_comments_path(@topic)
+			@action = "post"
+			@submit_name = "Create"
+		end
 
 		
-	# 	@comments = @topic.comments.includes(:user).order("updated_at DESC").page(params[:page]).per(5)
+		@comments = @topic.comments.includes(:user).order("updated_at DESC").page(params[:page]).per(5)
 
 	end
 	def create

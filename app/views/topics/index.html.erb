@@ -46,7 +46,7 @@
 	<% @topics.each do |t| %>
 		
 		<tr>
-			<td><%= link_to "#{truncate(t.title, :length => 40)}", topic_path(t) %></td>
+			<td><%= truncate(t.title, :length => 40) %></td>
 			<td><%= truncate(t.content, :length => 10) %></td>
 			<td><%= t.user.email %></td>
 			<td><%= t.created_at %></td>
